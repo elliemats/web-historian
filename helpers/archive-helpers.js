@@ -81,46 +81,8 @@ exports.downloadUrls = function(urlArray) {
   console.log("urlArray:", urlArray);
   for (var i = 0; i < urlArray.length; i++) {
     console.log("urlArray:", i, urlArray[i])
-    request('http://' + urlArray[i], function(error, response, body) {
 
-      if (!error) {
-      console.log("inside request urlArray", urlArray);
-        console.log(exports.paths.archivedSites + '/' + urlArray[i] + '');
-      }
-        fs.writeFile('' + exports.paths.archivedSites + '/' + urlArray[i], body, {'flag':'w'},
-          function(err) {
-            if (err) throw err;
-            console.log("is i defined", i)
-          });
-    })
+    request('http://' + urlArray[i]).pipe(fs.createWriteStream(exports.paths.archivedSites + '/' + urlArray[i]));
   }
 };
-
-
-
-// exports.downloadUrls = function(urlArray) {
-//   var bodyArray = [];
-//   for (var i = 0; i < urlArray.length; i++) {
-//     request('http://' + urlArray[i], function(error, response, body) {
-//       console.log(body.length);
-//       bodyArray.push({
-//         'url': urlArray[i],
-//         'body': body
-//       })
-
-//    //   console.log('bodyArray[i].url', bodyArray[i].url, 'bodyArray[i].body', bodyArray[i].body.length);
-
-//       ;
-//     })
-//   }
-//   for (var j = 0; j < bodyArray.length; j++) {
-//     exports.writeToArchive(bodyArray[j]);
-//   }
-// };
-
-
-
-
-
-
 
