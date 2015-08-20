@@ -140,14 +140,14 @@ describe("archive helpers", function(){
 
   describe("#downloadUrls", function () {
     it("should download all pending urls in the list", function (done) {
-      var urlArray = ["www.example.com", "www.google.com"];
+      var urlArray = ["www.consoley.com", "www.google.com", 'www.lessig2016.us'];
       archive.downloadUrls(urlArray);
 
       // Ugly hack to wait for all downloads to finish.
       setTimeout(function () {
         expect(fs.readdirSync(archive.paths.archivedSites)).to.deep.equal(urlArray);
         done();
-      }, 25);
+      }, 5000);
     });
   });
 });
